@@ -9,6 +9,13 @@ enum class Method {
     UNIMPLEMENTED
 };
 
+struct MethodHash {
+    size_t operator()(const Method& method) const noexcept
+    {
+        return static_cast<size_t>(method);
+    }
+};
+
 inline Method method_from_string(const std::string& str)
 {
     static const std::unordered_map<std::string, Method> STRING_TO_METHOD{
@@ -22,7 +29,7 @@ inline Method method_from_string(const std::string& str)
 
 inline const std::string& method_to_string(Method method)
 {
-    static const std::unordered_map<Method, std::string> METHOD_TO_STRING{
+    static const std::unordered_map<Method, std::string, MethodHash> METHOD_TO_STRING{
         { Method::GET, "GET" },
         { Method::UNIMPLEMENTED, "UNIMPLEMENTED" },
     };

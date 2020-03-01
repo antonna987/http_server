@@ -10,9 +10,16 @@ enum class Status {
     NOT_IMPLEMENTED = 501
 };
 
+struct StatusHash {
+    size_t operator()(const Status& status) const noexcept
+    {
+        return static_cast<size_t>(status);
+    }
+};
+
 std::string status_to_string(Status status)
 {
-    static const std::unordered_map<Status, std::string> STATUS_TO_STRING{
+    static const std::unordered_map<Status, std::string, StatusHash> STATUS_TO_STRING{
         { Status::OK, "OK" },
         { Status::NOT_FOUND, "Not Found" },
         { Status::NOT_IMPLEMENTED, "Not Implemented" },
