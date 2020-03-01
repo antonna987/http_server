@@ -20,7 +20,7 @@ struct Response {
 
         buffer.clear();
         buffer += PROTOCOL + " " + status_to_string(status) + "\r\n";
-        buffer += "Date: " + date_time_now_as_string() + "\r\n";
+        // buffer += "Date: " + date_time_now_as_string() + "\r\n";
         buffer += "Server: " + SERVER + "\r\n";
         buffer += "Connection: close\r\n";
         if (status != Status::OK) {
@@ -37,13 +37,13 @@ struct Response {
     std::string buffer;
 
 private:
-    std::string date_time_now_as_string() const
-    {
-        auto tp = std::chrono::system_clock::now();
-        auto t = std::chrono::system_clock::to_time_t(tp);
-        auto tm = *std::gmtime(&t);
-        std::stringstream ss;
-        ss << std::put_time(&tm, "%a, %d %b %Y %H:%M:%S %Z");
-        return ss.str();
-    }
+    // std::string date_time_now_as_string() const
+    // {
+    //     auto tp = std::chrono::system_clock::now();
+    //     auto t = std::chrono::system_clock::to_time_t(tp);
+    //     auto tm = *std::gmtime(&t);
+    //     std::stringstream ss;
+    //     ss << std::put_time(&tm, "%a, %d %b %Y %H:%M:%S %Z");
+    //     return ss.str();
+    // }
 };
